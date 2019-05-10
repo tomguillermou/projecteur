@@ -31,6 +31,10 @@ const attributes = {
         min: [13, 'You must be at least 13 to sign in.'],
         required: true,
     },
+    gender: {
+        type: String,
+        required: true,
+    },
 };
 
 const schemaProperties = {

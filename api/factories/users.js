@@ -2,6 +2,8 @@
 const faker = require('faker');
 const axios = require('axios');
 
+faker.locale = 'fr';
+
 async function createOne() {
     const attributes = {
         email: faker.internet.email(),
@@ -9,11 +11,11 @@ async function createOne() {
         firstname: faker.name.firstName(),
         lastname: faker.name.lastName(),
         age: faker.random.number({ min: 18, max: 60 }),
+        gender: faker.random.arrayElement(['male', 'female']),
     };
 
     try {
-        const res = await axios.post('http://localhost:5000/users', attributes);
-        console.log('User created:', res.data);
+        await axios.post('http://localhost:5000/api/users', attributes);
     } catch (error) {
         console.log(error);
     }
@@ -26,4 +28,6 @@ function factorize(count) {
     }
 }
 
-module.exports = factorize;
+module.exports = {
+    factorize,
+};

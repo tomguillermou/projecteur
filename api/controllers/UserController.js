@@ -17,6 +17,7 @@ class UserController extends CrudController {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             age: req.body.age,
+            gender: req.body.gender,
         };
         super.createOne(req, res, attributes);
     }

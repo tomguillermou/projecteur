@@ -1,18 +1,23 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const config = require('./config');
 
 const app = express();
 
-// Parse application/json (require Express 4.16+)
-app.use(express.json());
+// Enable CORS for all origins
+app.use(cors());
+
+// Parse application/json
+app.use(bodyParser.json());
 
 // Build router
-app.use('/users', require('./app/routes/users'));
+app.use('/api/users', require('./api/routes/users'));
 
 // Factories
-const userFactory = require('./app/factories/UserFactory');
+const usersFactory = require('./api/factories/users');
 
 app.listen(config.APP_PORT, async () => {
     console.log(`App listening on port ${config.APP_PORT}`);
@@ -27,7 +32,7 @@ app.listen(config.APP_PORT, async () => {
     }
 
     try {
-        userFactory(20);
+        usersFactory.factorize(5);
     } catch (error) {
         console.log(error);
     }
