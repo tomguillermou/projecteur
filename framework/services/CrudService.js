@@ -6,10 +6,11 @@ class CrudService {
     }
 
     async createOne(attributes) {
-        console.log('CrudService => createOne');
         try {
-            const data = await mongoose.model(this.model.modelName).create(attributes);
-            return data;
+            const result = await mongoose.model(this.model.modelName)
+                .create(attributes);
+
+            return result;
         } catch (error) {
             console.log(error);
             throw error;
@@ -17,21 +18,29 @@ class CrudService {
     }
 
     async readOne(id) {
-        console.log('CrudService => readOne');
         try {
-            const data = await mongoose.model(this.model.modelName).findById(id).exec();
-            return data;
+            const result = await mongoose.model(this.model.modelName)
+                .findById(id)
+                .exec();
+
+            return result;
         } catch (error) {
             console.log(error);
             throw error;
         }
     }
 
-    async readMany(limit) {
-        console.log('CrudService => readMany');
+    async readMany(conditions) {
         try {
-            const data = await mongoose.model(this.model.modelName).find().limit(limit).exec();
-            return data;
+            const count = await mongoose.model(this.model.modelName)
+                .count(conditions)
+                .exec();
+
+            const results = await mongoose.model(this.model.modelName)
+                .find(conditions)
+                .exec();
+
+            return { count, results };
         } catch (error) {
             console.log(error);
             throw error;

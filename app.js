@@ -5,19 +5,21 @@ const mongoose = require('mongoose');
 
 const config = require('./config');
 
+const frameworkRouter = require('./framework/core/router');
+
 const app = express();
 
-// Enable CORS for all origins
-app.use(cors());
-
-// Parse application/json
-app.use(bodyParser.json());
+// Middlewares
+app.use(cors()); // Enable CORS for all origins
+app.use(bodyParser.json()); // Parse application/json
 
 // Build router
-app.use('/api/users', require('./api/routes/users'));
+frameworkRouter.init(`${__dirname}/api/routes`);
+const router = frameworkRouter.get();
+app.use(router);
 
-// Factories
-const usersFactory = require('./api/factories/users');
+// Seeders
+const userSeeder = require('./api/db/seeders/userSeeder');
 
 app.listen(config.APP_PORT, async () => {
     console.log(`App listening on port ${config.APP_PORT}`);
@@ -31,8 +33,9 @@ app.listen(config.APP_PORT, async () => {
         console.log(error);
     }
 
+    // Seeding
     try {
-        usersFactory.factorize(5);
+        userSeeder.seed(200);
     } catch (error) {
         console.log(error);
     }
