@@ -1,6 +1,7 @@
-import GenericRoute from '../../../framework/routes/GenericRoute';
+import GenericRoute from '../../framework/routes/GenericRoute';
+import UserService from '../../services/UserService';
 
-const userService = require('../../services/userService');
+const userService = new UserService();
 
 class Route extends GenericRoute {
     getInputs(request) {

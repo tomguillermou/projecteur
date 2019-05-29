@@ -1,13 +1,11 @@
-const mongoose = require('mongoose');
-
-export default class CrudService {
+module.exports = class CrudService {
     constructor(model) {
         this.model = model;
     }
 
     async createOne(attributes) {
         try {
-            const result = await mongoose.model(this.model.modelName).create(attributes);
+            const result = await this.model.create(attributes);
             return result;
         } catch (error) {
             console.log(error);
@@ -17,7 +15,7 @@ export default class CrudService {
 
     async readOne(conditions) {
         try {
-            const result = await mongoose.model(this.model.modelName).findOne(conditions).exec();
+            const result = await this.model.findOne(conditions).exec();
             return result;
         } catch (error) {
             console.log(error);
@@ -30,7 +28,7 @@ export default class CrudService {
 
         // Fetch count
         try {
-            result.count = await mongoose.model(this.model.modelName).count(conditions).exec();
+            result.count = await this.model.count(conditions).exec();
         } catch (error) {
             console.log(error);
             throw error;
@@ -38,7 +36,7 @@ export default class CrudService {
 
         // Fetch results
         try {
-            result.results = await mongoose.model(this.model.modelName).find(conditions).exec();
+            result.results = await this.model.find(conditions).exec();
         } catch (error) {
             console.log(error);
             throw error;
@@ -54,4 +52,4 @@ export default class CrudService {
     async deleteOne() {
         // empty
     }
-}
+};

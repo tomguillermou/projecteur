@@ -25,6 +25,10 @@ const attributes = {
             message: 'This username already exists',
         },
     },
+    hash: {
+        type: String,
+        required: true,
+    },
     gender: {
         type: String,
         required: true,
@@ -37,10 +41,6 @@ const attributes = {
 };
 
 const options = {
-    timestamps: {
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
-    },
     toObject: {
         virtuals: true,
     },

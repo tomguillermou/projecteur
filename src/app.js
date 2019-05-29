@@ -6,7 +6,9 @@ const mongoose = require('mongoose');
 
 const config = require('./config');
 
-const frameworkRouter = require('./framework/core/router');
+// Routers
+const webRouter = require('./routes/web');
+const apiRouter = require('./routes/api');
 
 const app = express();
 
@@ -15,30 +17,22 @@ app.use(helmet());
 app.use(cors()); // Enable CORS for all origins
 app.use(bodyParser.json()); // Parse application/json
 
-// Build router
-frameworkRouter.init(`${__dirname}/api/routes`, '/v1');
-const router = frameworkRouter.get();
-app.use(router);
+// Web router
+app.use(apiRouter);
+app.use(webRouter);
 
-// Seeders
-// const userSeeder = require('./api/db/seeders/userSeeder');
+// Framework scripts
+require('./framework/scripts/seed'); // Seed
 
 app.listen(config.APP_PORT, async () => {
     console.log(`App listening on port ${config.APP_PORT}`);
 
     // Connect to MongoDB
+    console.log('Connecting to MongoDB');
     try {
-        console.log('Connecting to MongoDB...');
         await mongoose.connect(config.DATABASE_ADDRESS, { useNewUrlParser: true });
         console.log('Connected to MongoDB');
     } catch (error) {
-        console.log(error);
-    }
-
-    // Seed DB
-    try {
-        // userSeeder.seed(200);
-    } catch (error) {
-        console.log(error);
+        console.log('Cannot connect to MongoDB');
     }
 });
