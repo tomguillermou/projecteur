@@ -8,24 +8,24 @@ const attributes = {
         required: true,
         validate: {
             validator: async (value) => {
-                const document = await mongoose.model('User').findOne({ email: value }).exec();
+                const document = await mongoose.model('User')
+                    .findOne({ email: value })
+                    .exec();
+
                 return (document === null);
             },
             message: 'This email is already used',
         },
     },
-    username: {
+    hash: {
         type: String,
         required: true,
-        validate: {
-            validator: async (value) => {
-                const document = await mongoose.model('User').findOne({ username: value }).exec();
-                return (document === null);
-            },
-            message: 'This username already exists',
-        },
     },
-    hash: {
+    firstname: {
+        type: String,
+        required: true,
+    },
+    lastname: {
         type: String,
         required: true,
     },

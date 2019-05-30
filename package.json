@@ -4,7 +4,7 @@
   "description": "Create simple feedback stream for your products",
   "main": "index.js",
   "scripts": {
-    "seed": "node src/framework/scripts/seed.js",
+    "seed": "node --require dotenv/config src/framework/scripts/seed.js",
     "start": "nodemon --exec babel-node src/app.js"
   },
   "author": "",
@@ -19,12 +19,10 @@
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
-    "googleapis": "^40.0.0",
     "helmet": "^3.18.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.5.3",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "lodash": "^4.17.11",
+    "mongoose": "^5.5.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

@@ -5,11 +5,11 @@ const router = express.Router();
 /**
  * Require controllers
  */
-const AuthController = require('../controllers/AuthController');
+const TestController = require('../controllers/web/TestController');
 
 /**
  * Routes
  */
-router.get('/login', AuthController.login);
+router.get('/test', TestController.test);
 
 module.exports = router;
