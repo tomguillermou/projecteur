@@ -22,7 +22,8 @@
     "helmet": "^3.18.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
-    "mongoose": "^5.5.3"
+    "mongoose": "^5.5.3",
+    "pug": "^2.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

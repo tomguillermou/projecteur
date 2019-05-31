@@ -1,8 +1,8 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -14,30 +14,29 @@ const apiRouter = require('./routes/api');
 
 const app = express();
 
-// Middlewares
-const verifyJwt = require('./middlewares/verifyJwt');
+// Set variables for template engine
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, './views'));
 
+// Middlewares
 app.use(helmet()); // Use Helmet to protect headers
 app.use(cors()); // Enable CORS for all origins
-app.use(bodyParser.json()); // Parse application/json
-app.use(verifyJwt);
 
 // Web router
 app.use('/api', apiRouter);
 app.use(webRouter);
 
-// Framework scripts
-// require('./framework/scripts/seed'); // Seed
+// Scripts
+// require('./scripts/seed'); // Seed
 
-app.listen(config.appPort, async () => {
-    console.log(`App listening on port ${config.appPort}`);
-
-    // Connect to MongoDB
-    console.log('Connecting to MongoDB');
-    try {
-        await mongoose.connect(config.databaseAddress, { useNewUrlParser: true });
+console.log('Connecting to MongoDB');
+mongoose.connect(process.env.DATABASE_ADDRESS, { useNewUrlParser: true }, (err) => {
+    if (err) {
+        console.log(err);
+    } else {
         console.log('Connected to MongoDB');
-    } catch (error) {
-        console.log('Cannot connect to MongoDB');
+        app.listen(config.appPort, () => {
+            console.log(`App listening on port ${config.appPort}`);
+        });
     }
 });

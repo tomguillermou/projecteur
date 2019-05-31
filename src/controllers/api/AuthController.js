@@ -17,6 +17,7 @@ module.exports = {
             } else if (_.isEmpty(user)) {
                 res.status(500).json({ message: 'Invalid email/password' });
             } else if (bcrypt.compareSync(password, user.hash)) {
+                // eslint-disable-next-line no-underscore-dangle
                 const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
                 res.status(200).json({ token });
             } else {
@@ -27,6 +28,8 @@ module.exports = {
 
     // register
     register: (req, res) => {
+        console.log('Incoming register request');
+
         const hash = bcrypt.hashSync(req.body.password, 10);
 
         const doc = {

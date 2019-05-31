@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+    if error
+        div.alert.alert-danger Error
+    form(method="POST" action="http://localhost:5000/register")
+        input(type="email", name="email")
+        input(type="password", name="password")
+        input(type="text", name="firstname")
+        input(type="text", name="lastname")
+        input(type="radio", name="male")
+        input(type="radio", name="female")
+        input(type="number", name="age")
+        button.btn.btn-primary(type="submit") Register
+

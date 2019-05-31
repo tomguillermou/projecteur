@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+    form(method="POST" action="http://localhost:5000/login")
+        input(type="email", name="email")
+        input(type="password", name="password")
+        button(type="submit") Login
+
