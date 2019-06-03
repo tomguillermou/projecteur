@@ -33,11 +33,6 @@ const attributes = {
         type: String,
         required: true,
     },
-    age: {
-        type: Number,
-        min: [18, 'You must be at least 18 to sign in'],
-        required: true,
-    },
 };
 
 const options = {

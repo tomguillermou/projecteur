@@ -13,23 +13,21 @@ module.exports = {
 
         User.findOne({ email }, (err, user) => {
             if (err) {
-                res.status(500).json({ message: err.message });
+                res.status(500).json({ message: 'Internal server error' });
             } else if (_.isEmpty(user)) {
-                res.status(500).json({ message: 'Invalid email/password' });
+                res.status(500).json({ message: 'Invalid email or password' });
             } else if (bcrypt.compareSync(password, user.hash)) {
-                // eslint-disable-next-line no-underscore-dangle
                 const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
                 res.status(200).json({ token });
             } else {
-                res.status(500).json({ message: 'Invalid email/password' });
+                res.status(500).json({ message: 'Invalid email or password' });
             }
         });
     },
 
     // register
     register: (req, res) => {
-        console.log('Incoming register request');
-
+        console.log(req.body);
         const hash = bcrypt.hashSync(req.body.password, 10);
 
         const doc = {
@@ -38,14 +36,18 @@ module.exports = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             gender: req.body.gender,
-            age: req.body.age,
         };
 
         User.create(doc, (err, user) => {
             if (err) {
-                res.status(500).json({ message: err.message });
+                if (err.name === 'ValidationError') {
+                    res.status(500).json({ message: 'This email is already used' });
+                } else {
+                    res.status(500).json({ message: 'Internal server error' });
+                }
             } else {
-                res.status(200).json(user);
+                const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+                res.status(200).json({ token });
             }
         });
     },

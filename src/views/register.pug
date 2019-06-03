@@ -1,15 +1,30 @@
 extends layout.pug
 
 block content
+
+    div.mb-3
+        h2 Create your account
+
     if error
-        div.alert.alert-danger Error
-    form(method="POST" action="http://localhost:5000/register")
-        input(type="email", name="email")
-        input(type="password", name="password")
-        input(type="text", name="firstname")
-        input(type="text", name="lastname")
-        input(type="radio", name="male")
-        input(type="radio", name="female")
-        input(type="number", name="age")
-        button.btn.btn-primary(type="submit") Register
+        div.alert.alert-danger #{errorMessage}
+    // register form
+    form(method='POST' action='/register')
+        div.form-group.mr-md-auto
+            input.form-control(type='text' name='firstname' placeholder='Firstname' required)
+        div.form-group.mr-md-auto
+            input.form-control(type='text' name='lastname' placeholder='Lastname' required)
+        div.form-group
+            div.custom-control.custom-control-inline.custom-radio
+                input#customRadio1.custom-control-input(type="radio" name="male" checked)
+                label.custom-control-label(for="customRadio1") Homme
+            div.custom-control.custom-control-inline.custom-radio
+                input#customRadio2.custom-control-input(type="radio" name="female")
+                label.custom-control-label(for="customRadio2") Femme
+        div.form-group
+            input.form-control(type='email' name='email' placeholder='Email' required)
+        div.form-group
+            input.form-control(type='password' name='password' minlength="8" placeholder='Password' required)
+        div.form-group
+            input.form-control(type='password' name='confirmPassword' placeholder='Confirm password' required)
+        button.btn.btn-success(type='submit') Create account
 

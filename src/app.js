@@ -1,6 +1,8 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
@@ -14,13 +16,18 @@ const apiRouter = require('./routes/api');
 
 const app = express();
 
-// Set variables for template engine
+// Set variables for PugJS template engine
 app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, './views'));
+app.set('views', path.join(__dirname, 'views'));
+
+// Load static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middlewares
+app.use(morgan('dev'));
 app.use(helmet()); // Use Helmet to protect headers
 app.use(cors()); // Enable CORS for all origins
+app.use(cookieParser());
 
 // Web router
 app.use('/api', apiRouter);

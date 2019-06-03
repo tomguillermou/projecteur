@@ -20,10 +20,9 @@ router.post('/auth/register', AuthController.register);
 router.post('/auth/login', AuthController.login);
 
 /**
- * Enable JWT token verification middleware for every API route
- * (other than auth routes)
+ * Enable JWT token verification middleware for every API route (other than auth routes)
  */
-router.use(require('../middlewares/verifyJwt'));
+// router.use(require('../middlewares/verifyJwt'));
 
 /**
  * Routes
