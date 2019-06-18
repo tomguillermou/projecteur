@@ -1,5 +1,3 @@
-
-
 module.exports = {
 
     view: (req, res) => {

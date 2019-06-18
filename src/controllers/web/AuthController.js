@@ -1,14 +1,13 @@
-// const _ = require('lodash');
 const axios = require('axios');
 
 module.exports = {
 
     viewLogin: (req, res) => {
-        res.render('login', { title: 'Login', error: false });
+        res.render('auth/login', { error: false });
     },
 
     viewRegister: (req, res) => {
-        res.render('register', { title: 'Register', error: false });
+        res.render('auth/register', { error: false });
     },
 
     login: (req, res) => {
@@ -22,8 +21,7 @@ module.exports = {
             })
             .catch((error) => {
                 console.log(error.response.data);
-                res.render('login', {
-                    title: 'Login',
+                res.render('auth/login', {
                     error: true,
                     errorMessage: error.response.data.message,
                 });
@@ -31,37 +29,31 @@ module.exports = {
     },
 
     register: (req, res) => {
-        if (req.body.password !== req.body.confirmPassword) {
-            res.render('register', {
-                title: 'Register',
-                error: true,
-                errorMessage: 'Password confirmation does not match password',
-            });
-        } else {
-            if (req.body.male === 'on') {
-                req.body.gender = 'male';
-                delete req.body.male;
-            } else if (req.body.female === 'on') {
-                req.body.gender = 'female';
-                delete req.body.female;
-            }
+        const user = {
+            'email': req.body.email,
+            'password': req.body.password,
+            'firstname': req.body.firstname,
+            'lastname': req.body.lastname,
+            'gender': req.body.gender,
+        };
 
-            delete req.body.confirmPassword;
-
-            axios.post('http://localhost:5000/api/auth/register', req.body)
-                .then((response) => {
-                    // store token in cookies
-                    res.cookie('token', response.data.token);
-                    res.redirect('/');
-                })
-                .catch((error) => {
-                    console.log(error.response.data);
-                    res.render('register', {
-                        title: 'Register',
-                        error: true,
-                        errorMessage: error.response.data.message,
-                    });
+        axios.post('http://localhost:5000/api/auth/register', user)
+            .then((response) => {
+                // store token in cookies
+                res.cookie('token', response.data.token);
+                res.redirect('/');
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+                res.render('auth/register', {
+                    error: true,
+                    errorMessage: error.response.data.message,
                 });
-        }
+            });
+    },
+
+    logout: (req, res) => {
+        res.clearCookie('token');
+        res.redirect('/');
     },
 };

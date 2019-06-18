@@ -1,41 +1,50 @@
 {
-  "name": "fidbak",
-  "version": "1.0.0",
-  "description": "Create simple feedback stream for your products",
-  "main": "index.js",
-  "scripts": {
-    "seed": "node --require dotenv/config src/framework/scripts/seed.js",
-    "start": "nodemon --exec babel-node src/app.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "@babel/runtime": "^7.4.5",
-    "axios": "^0.18.0",
-    "bcrypt": "^3.0.6",
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.4",
-    "cors": "^2.8.5",
-    "dotenv": "^8.0.0",
-    "express": "^4.16.4",
-    "faker": "^4.1.0",
-    "helmet": "^3.18.0",
-    "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.11",
-    "mongoose": "^5.5.3",
-    "morgan": "^1.9.1",
-    "pug": "^2.0.3"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/node": "^7.4.5",
-    "@babel/plugin-transform-runtime": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2",
-    "nodemon": "^1.18.11"
-  }
+    "name": "fidbak",
+    "version": "1.0.0",
+    "description": "Create simple feedback stream for your products",
+    "main": "index.js",
+    "scripts": {
+        "seed": "node --require dotenv/config src/framework/scripts/seed.js",
+        "start": "nodemon --exec babel-node src/app.js"
+    },
+    "_moduleAliases": {
+        "@root": "src",
+        "@controllers": "src/controllers",
+        "@middlewares": "src/middlewares",
+        "@models": "src/models",
+        "@routes": "src/routes",
+        "@services": "src/services"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@babel/polyfill": "^7.4.4",
+        "@babel/runtime": "^7.4.5",
+        "axios": "^0.19.0",
+        "bcrypt": "^3.0.6",
+        "body-parser": "^1.18.3",
+        "cookie-parser": "^1.4.4",
+        "cors": "^2.8.5",
+        "dotenv": "^8.0.0",
+        "express": "^4.16.4",
+        "faker": "^4.1.0",
+        "helmet": "^3.18.0",
+        "jsonwebtoken": "^8.5.1",
+        "lodash": "^4.17.11",
+        "module-alias": "^2.2.0",
+        "mongoose": "^5.5.3",
+        "morgan": "^1.9.1",
+        "pug": "^2.0.3"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.4.4",
+        "@babel/core": "^7.4.5",
+        "@babel/node": "^7.4.5",
+        "@babel/plugin-transform-runtime": "^7.4.4",
+        "@babel/preset-env": "^7.4.5",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.17.2",
+        "nodemon": "^1.18.11"
+    }
 }

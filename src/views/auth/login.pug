@@ -1,0 +1,20 @@
+extends ../layout.pug
+
+block content
+
+    div.mb-4
+        h2 Connectez-vous
+
+    if error
+        div.alert.alert-danger #{errorMessage}
+    form(method='POST' action='/login')
+        div.form-group
+            label(for='email') Email :
+            input#email.form-control(type='text' name='email' required)
+        div.form-group
+            label(for='password') Mot de passe :
+            input#password.form-control(type='password' name='password' required)
+        button.btn.btn-success(type='submit') Se connecter
+
+
+

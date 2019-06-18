@@ -1,0 +1,25 @@
+extends ../layout.pug
+
+block content
+
+    div.mb-3
+        h2 Créez votre compte
+
+    if error
+        div.alert.alert-danger #{errorMessage}
+    // register form
+    form(method='POST' action='/register')
+        div.form-group
+            label(for='firstname') Prénom :
+            input#firstname.form-control(type='text' name='firstname' required)
+        div.form-group
+            label(for='lastname') Nom :
+            input#lastname.form-control(type='text' name='lastname' required)
+        div.form-group
+            label(for='email') Email :
+            input#email.form-control(type='text' name='email' required)
+        div.form-group
+            label(for='password') Mot de passe :
+            input#password.form-control(type='password' minlength="8" name='password' required)
+        button.btn.btn-success(type='submit') S'inscire
+

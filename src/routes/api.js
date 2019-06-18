@@ -3,10 +3,10 @@ const bodyParser = require('body-parser');
 
 const router = express.Router();
 
-/**
- * Require controllers
- */
-const AuthController = require('../controllers/api/AuthController');
+const verifyAuthorization = require('@middlewares/verifyAuthorization');
+
+const AuthController = require('@controllers/api/AuthController');
+const ProjectController = require('@controllers/api/ProjectController');
 
 /**
  * Middlewares
@@ -14,18 +14,13 @@ const AuthController = require('../controllers/api/AuthController');
 router.use(bodyParser.json()); // Parse application/json
 
 /**
- * Auth routes
+ * Routes
  */
 router.post('/auth/register', AuthController.register);
 router.post('/auth/login', AuthController.login);
 
-/**
- * Enable JWT token verification middleware for every API route (other than auth routes)
- */
-// router.use(require('../middlewares/verifyJwt'));
+router.use(verifyAuthorization());
 
-/**
- * Routes
- */
+router.post('/projects', ProjectController.create);
 
 module.exports = router;

@@ -1,0 +1,24 @@
+extends layout.pug
+
+block content
+
+    h1 Créez votre projet
+
+    if error
+        div.alert.alert-danger #{errorMessage}
+
+    //- register form
+    form(method='post' action='/test')
+        div.form-group
+            label(for='name') Nom :
+            input#name.form-control(type='text' name='name' required)
+        div.form-group
+            label(for='slogan') Slogan :
+            input#slogan.form-control(type='text' name='slogan' required)
+        div.form-group
+            label(for='description') Description :
+            textarea#description.form-control(name="description" cols="30" rows="3" placeholder="Expliquez brèvement en quoi consiste votre projet (objectifs, etc)..." required)
+        div.form-group
+            label(for='membersNeeded') Nombre de membres à recruter :
+            input#membersNeeded.form-control(type='number' name='members_needed' value="1" required)
+        button.btn.btn-success(type='submit') Créer le projet

@@ -6,32 +6,18 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         <link rel="icon" href="/images/favicon.ico" />
-        title My Site - #{title}
+        title Projecteur
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
         block scripts
 
     body
-        header
-            div(class="d-flex flex-column flex-md-row align-items-center p-3 mb-3 bg-dark border-bottom shadow-sm")
-                div(class="d-flex flex-row align-items-center mr-md-auto")
-                    a(href="/")
-                        img(src="/images/favicon.ico", alt="Icon", width="48", height="48")
-                    h1.text-light Projecteur
-                div
-                    if auth
-                        a(href="#") My profile
-                    else
-                        a.mr-3.btn.btn-outline-light(href="/login") Login
-                        a.btn.btn-success(href="/register") Register
+        include includes/header.pug
 
         main
             div.container
                 block content
 
-        footer.footer
-            div(class="d-flex flex-column flex-md-row justify-content-around align-items-center py-3 mt-5 bg-dark")
-                div.text-light © 2019 Projecteur, Inc.
-                div.text-light Coded with #[img(src="/images/heart.png", alt="Heart logo", width="20", height="20")] by Tom
+        include includes/footer.pug
 
         script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js")

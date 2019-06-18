@@ -29,10 +29,6 @@ const attributes = {
         type: String,
         required: true,
     },
-    gender: {
-        type: String,
-        required: true,
-    },
 };
 
 const options = {

@@ -6,13 +6,14 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
+require('module-alias/register');
 require('dotenv').config();
 
-const config = require('./config');
+const config = require('@root/config');
 
 // Routers
-const webRouter = require('./routes/web');
-const apiRouter = require('./routes/api');
+const webRouter = require('@routes/web');
+const apiRouter = require('@routes/api');
 
 const app = express();
 
