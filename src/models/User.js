@@ -8,11 +8,12 @@ const attributes = {
         required: true,
         validate: {
             validator: async (value) => {
-                const document = await mongoose.model('User')
-                    .findOne({ email: value })
+                const user = await mongoose.model('User')
+                    .findOne()
+                    .where('email').equals(value)
                     .exec();
 
-                return (document === null);
+                return (user === null);
             },
             message: 'This email is already used',
         },

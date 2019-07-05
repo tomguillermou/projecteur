@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -13,7 +14,6 @@ const config = require('@root/config');
 
 // Routers
 const webRouter = require('@routes/web');
-const apiRouter = require('@routes/api');
 
 const app = express();
 
@@ -29,9 +29,9 @@ app.use(morgan('dev'));
 app.use(helmet()); // Use Helmet to protect headers
 app.use(cors()); // Enable CORS for all origins
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Web router
-app.use('/api', apiRouter);
 app.use(webRouter);
 
 // Scripts

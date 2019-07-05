@@ -6,7 +6,7 @@ block content
         h2 Connectez-vous
 
     if error
-        div.alert.alert-danger #{errorMessage}
+        div.alert.alert-danger #{error}
     form(method='POST' action='/login')
         div.form-group
             label(for='email') Email :

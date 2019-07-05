@@ -1,5 +1,5 @@
 
-module.exports = () => (req, res, next) => {
+module.exports = (req, res, next) => {
     if (req.isAuth()) {
         res.redirect('/');
     }

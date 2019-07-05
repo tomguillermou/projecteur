@@ -17,8 +17,8 @@ module.exports = {
         'linebreak-style': 0,
         'no-console': 0,
         'import/no-unresolved': 0,
-        'quote-props': 0,
         'comma-dangle': 0,
-        'no-underscore-dangle': 0
+        'no-underscore-dangle': 0,
+        'padded-blocks': 0,
     },
 };
