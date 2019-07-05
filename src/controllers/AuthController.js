@@ -26,7 +26,7 @@ module.exports = {
 
                 const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
 
-                // store token in cookies and redirect to homepage
+                // store JWT in cookies and redirect to homepage
                 res.cookie(process.env.JWT_COOKIE_NAME, token);
                 res.redirect('/');
                 
@@ -53,7 +53,7 @@ module.exports = {
 
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
 
-            // store JWT in cookies
+            // store JWT in cookies and redirect to homepage
             res.cookie(process.env.JWT_COOKIE_NAME, token);
             res.redirect('/');
 
@@ -67,5 +67,5 @@ module.exports = {
         // remove JWT from cookies and redirect to homepage
         res.clearCookie(process.env.JWT_COOKIE_NAME);
         res.redirect('/');
-    },
+    }
 };
