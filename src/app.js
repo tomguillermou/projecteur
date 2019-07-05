@@ -10,7 +10,7 @@ const path = require('path');
 require('module-alias/register');
 require('dotenv').config();
 
-const config = require('@root/config');
+const config = require('@root/config.json');
 
 // Routers
 const webRouter = require('@routes/web');
@@ -19,7 +19,7 @@ const app = express();
 
 // Set variables for PugJS template engine
 app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(path.join(__dirname, '../'), 'views'));
 
 // Load static files
 app.use(express.static(path.join(__dirname, 'public')));

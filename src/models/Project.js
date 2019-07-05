@@ -36,13 +36,8 @@ const attributes = {
     }
 };
 
-const options = {
-    toObject: {
-        virtuals: true,
-    },
-    toJSON: {
-        virtuals: true
-    }
-};
+const options = {};
 
-module.exports = mongoose.model(name, new mongoose.Schema(attributes, options));
+const schema = new mongoose.Schema(attributes, options);
+
+module.exports = mongoose.model(name, schema);

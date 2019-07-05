@@ -4,8 +4,9 @@ const router = express.Router();
 
 const isAuth = require('@middlewares/isAuth');
 const redirectIfAuth = require('@middlewares/redirectIfAuthenticated');
+// const authenticateUser = require('@middlewares/authenticateUser');
 
-const IndexController = require('@controllers/IndexController');
+const HomeController = require('@controllers/HomeController');
 const AuthController = require('@controllers/AuthController');
 const ProjectController = require('@controllers/ProjectController');
 
@@ -17,7 +18,7 @@ router.use(isAuth);
 /**
  * Routes
  */
-router.get('/', IndexController.view);
+router.get('/', HomeController.view);
 
 // Auth
 router.get('/login', redirectIfAuth, AuthController.viewLogin);

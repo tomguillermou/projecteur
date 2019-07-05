@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const name = 'User';
 
@@ -18,7 +19,7 @@ const attributes = {
             message: 'This email is already used',
         },
     },
-    hash: {
+    password: {
         type: String,
         required: true,
     },
@@ -32,13 +33,21 @@ const attributes = {
     },
 };
 
-const options = {
-    toObject: {
-        virtuals: true,
-    },
-    toJSON: {
-        virtuals: true,
-    },
+const options = {};
+
+const schema = new mongoose.Schema(attributes, options);
+
+// compare password with hash
+schema.methods.comparePassword = function (plaintext) {
+    return bcrypt.compareSync(plaintext, this.password);
 };
 
-module.exports = mongoose.model(name, new mongoose.Schema(attributes, options));
+// hash password before saving
+schema.pre('save', function (next) {
+    if (this.isModified('password')) {
+        this.password = bcrypt.hashSync(this.password, 10);
+    }
+    next();
+});
+
+module.exports = mongoose.model(name, schema);
