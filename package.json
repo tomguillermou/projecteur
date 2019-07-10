@@ -1,7 +1,7 @@
 {
-    "name": "fidbak",
+    "name": "projecteur",
     "version": "1.0.0",
-    "description": "Create simple feedback stream for your products",
+    "description": "Share your project idea and recruit new members",
     "main": "index.js",
     "scripts": {
         "seed": "node --require dotenv/config src/framework/scripts/seed.js",
